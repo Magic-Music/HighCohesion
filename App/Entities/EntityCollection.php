@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-use App\Entities\Exceptions\InvalidEntityValueException;
+use App\Exceptions\InvalidEntityValueException;
 use Iterator;
 
 abstract class EntityCollection implements Iterator
@@ -16,7 +16,7 @@ abstract class EntityCollection implements Iterator
      */
     protected abstract function getCollectionEntityType(): string;
 
-    protected function __construct(array $entities = [])
+    public function __construct(array $entities = [])
     {
         $this->collectionEntityType = $this->getCollectionEntityType();
 

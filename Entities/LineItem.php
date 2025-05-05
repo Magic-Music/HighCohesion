@@ -3,7 +3,7 @@
 namespace Entities;
 
 use App\Entities\Entity;
-use App\Interfaces\CartInterface;
+use Interfaces\CartInterface;
 
 class LineItem extends Entity implements CartInterface
 {

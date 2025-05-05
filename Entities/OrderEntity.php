@@ -4,6 +4,9 @@ namespace Entities;
 
 use Entities\Collections\LineItems;
 
+/**
+ * This class answers Programming question 1
+ */
 class OrderEntity extends \App\Entities\Entity
 {
     public string $orderNumber;

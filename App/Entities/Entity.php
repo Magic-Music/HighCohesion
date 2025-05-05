@@ -2,8 +2,8 @@
 
 namespace App\Entities;
 
-use App\Entities\Exceptions\InvalidEntityKeyException;
-use App\Entities\Exceptions\InvalidJsonException;
+use App\Exceptions\InvalidEntityKeyException;
+use App\Exceptions\InvalidJsonException;
 
 /**
  * Extend this class with Entity classes that define the entity
