@@ -2,7 +2,7 @@
 
 namespace Entities;
 
-class ShippingAddressEntity extends \App\Entities\Entity
+class ShippingAddress extends \App\Entities\Entity
 {
     public string $address1;
     public string $address2 = '';

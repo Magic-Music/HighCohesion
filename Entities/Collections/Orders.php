@@ -3,7 +3,7 @@
 namespace Entities\Collections;
 
 use App\Entities\EntityCollection;
-use Entities\OrderEntity;
+use Entities\Order;
 
 class Orders extends EntityCollection
 {
@@ -17,6 +17,6 @@ class Orders extends EntityCollection
      */
     protected function getCollectionEntityType(): string
     {
-        return OrderEntity::class;
+        return Order::class;
     }
 }

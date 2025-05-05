@@ -5,12 +5,12 @@ namespace Services;
 use App\Exceptions\InvalidJsonException;
 use Entities\Collections\LineItems;
 use Entities\LineItem;
-use Entities\OrderEntity;
-use Entities\ShippingAddressEntity;
+use Entities\Order;
+use Entities\ShippingAddress;
 
 class ParseOrderService
 {
-    private OrderEntity $order;
+    private Order $order;
 
     public function __construct(string $jsonOrderData)
     {
@@ -32,7 +32,7 @@ class ParseOrderService
             // to be an entity and entity collection
             // If immutable variables are preferred, the individual
             // items can be passed into the order->set method
-            $data['shippingAddress'] = new ShippingAddressEntity($data['shippingAddress']);
+            $data['shippingAddress'] = new ShippingAddress($data['shippingAddress']);
             $data['line_items'] = $this->parseLineItems($data['line_items']);
 
             $this->order->set($data);
