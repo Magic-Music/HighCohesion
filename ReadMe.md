@@ -46,3 +46,16 @@ same title, currency and total fields as ORDER, how would you optimise both clas
   foreign key fields used in order and purchase_order tables to reference them by id.
   This also allows constraints to be set up so that the duplicated data fields couldn't   
   be deleted if they are being reference, thereby ensuring data integrity
+
+---
+
+## Brainstorming an integration plan
+
+The following diagram shows some ideas I had whilst thinking about this integration. It includes:
+
+- Base/Adaptor layers for the E-Commerce and Warehouse integrations - Base layer to contain reusable systems
+- Schedulers to control getting/posting of data with back-off retry plans and circuit breakers
+- Queueing of jobs with Dead Letter Queue for simplified retry of failed jobs
+- Event bus to centralise systems, logging, alerting etc. and allow simplified integration of new systems
+
+![IntegrationPlan.png](IntegrationPlan.png)
