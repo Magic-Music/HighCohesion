@@ -2,8 +2,8 @@
 
 namespace App\Entities;
 
-use App\Exceptions\InvalidEntityKeyException;
-use App\Exceptions\InvalidJsonException;
+use App\Entities\Exceptions\InvalidEntityKeyException;
+use App\Entities\Exceptions\InvalidJsonException;
 
 /**
  * Extend this class with Entity classes that define the entity
@@ -115,7 +115,7 @@ abstract class Entity
      * If keys are passed in as e.g. snake or kebab case, convert
      * to camel-case to follow property naming conventions
      */
-    private function camel($value)
+    private function camel($value): string
     {
         $words = preg_split('/\s-_/', $value);
         $upperCaseWords = array_map(fn ($word) => ucfirst($word), $words);
