@@ -29,7 +29,7 @@ abstract class Entity
      */
     protected function throwExceptionOnUndefinedKey(): bool
     {
-        return true;
+        return false;
     }
 
     protected function validate($key, $value): void

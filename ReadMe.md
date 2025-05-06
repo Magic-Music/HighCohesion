@@ -59,3 +59,8 @@ The following diagram shows some ideas I had whilst thinking about this integrat
 - Event bus to centralise systems, logging, alerting etc. and allow simplified integration of new systems
 
 ![IntegrationPlan.png](IntegrationPlan.png)
+
+---
+
+- Please see `Tests/TestingNotes.md` for details of tests for these classes
+- Please see `Tests/test.php` for a basic demo class
