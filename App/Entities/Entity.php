@@ -14,14 +14,6 @@ use App\Exceptions\InvalidJsonException;
 abstract class Entity
 {
     /**
-     * By default ignore any property values that don't exist.
-     * Override this to 'true' to throw an exception instead.
-     */
-    protected bool $throwExceptionOnUndefinedKey = false;
-
-    private array $keyCache;
-
-    /**
      * Optionally set data on construct in array or json format
      * 'Collection' could be added to the allowed types in a laravel implementation
      */
@@ -29,6 +21,15 @@ abstract class Entity
         if ($data) {
             $this->set($data);
         }
+    }
+
+    /**
+     * By default ignore any property values that don't exist.
+     * Override this to 'true' to throw an exception instead.
+     */
+    protected function throwExceptionOnUndefinedKey(): bool
+    {
+        return true;
     }
 
     protected function validate($key, $value): void
@@ -48,11 +49,27 @@ abstract class Entity
     /**
      * Convert keys to original format
      */
-    public function toArray(): array
+    public function toArray(Entity|EntityCollection|null $input = null): array
     {
+        if (!$input) {
+            $input = $this->get();
+        }
+
         $array = [];
-        foreach ($this->get() as $key => $value) {
-            $array[$this->keyCache[$key]] = $value;
+        foreach ($input as $key => $value) {
+            if ($value instanceof Entity) {
+                $value = $this->toArray($value);
+            }
+
+            if ($value instanceof EntityCollection) {
+                $values = [];
+                foreach ($value as $entity) {
+                    $values[] = $this->toArray($entity);
+                }
+                $value = $values;
+            }
+
+            $array[$key] = $value;
         }
 
         return $array;
@@ -90,12 +107,9 @@ abstract class Entity
             }
         }
 
-        foreach ($data as $rawKey => $value) {
-            $key = $this->camel($rawKey);
-            $this->keyCache[$key] = $rawKey;
-
+        foreach ($data as $key => $value) {
             if (!property_exists($this, $key)) {
-                if ($this->throwExceptionOnUndefinedKey) {
+                if ($this->throwExceptionOnUndefinedKey()) {
                     $entityName =  (new \ReflectionClass($this))->getShortName();
                     throw new InvalidEntityKeyException("Invalid $entityName entity key $key");
                 }
@@ -109,17 +123,5 @@ abstract class Entity
         }
 
         return $this;
-    }
-
-    /**
-     * If keys are passed in as e.g. snake or kebab case, convert
-     * to camel-case to follow property naming conventions
-     */
-    private function camel($value): string
-    {
-        $words = preg_split('/\s-_/', $value);
-        $upperCaseWords = array_map(fn ($word) => ucfirst($word), $words);
-
-        return lcfirst(implode($upperCaseWords));
     }
 }

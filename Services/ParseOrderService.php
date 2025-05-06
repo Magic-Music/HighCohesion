@@ -12,14 +12,12 @@ class ParseOrderService
 {
     private Order $order;
 
-    public function __construct(string $jsonOrderData)
+    public function __construct()
     {
-        $this->parseJsonOrder($jsonOrderData);
-
-        return $this->order;
+        $this->order = new Order;
     }
 
-    private function parseJsonOrder($jsonOrderData): void
+    public function parseJsonOrder(string $jsonOrderData): Order
     {
         $data = json_decode($jsonOrderData, JSON_OBJECT_AS_ARRAY);
 
@@ -28,17 +26,37 @@ class ParseOrderService
         }
 
         try {
-            // This updates shippingAddress and line_items
-            // to be an entity and entity collection
-            // If immutable variables are preferred, the individual
-            // items can be passed into the order->set method
-            $data['shippingAddress'] = new ShippingAddress($data['shippingAddress']);
-            $data['line_items'] = $this->parseLineItems($data['line_items']);
+            $shippingAddress = $this->parseShippingAddress($data['shippingAddress']);
+            $lineItems = $this->parseLineItems($data['line_items']);
 
-            $this->order->set($data);
+            $orderData = [
+                'orderNumber' => $data['order_number'],
+                'title' => $data['title'],
+                'currency' => $data['title'],
+                'shippingAddress' => $shippingAddress,
+                'total' => $data['total'],
+                'lineItems' => $lineItems,
+            ];
+
+            $this->order->set($orderData);
         } catch (\Exception $e) {
             throw new InvalidJsonException("Order contains invalid data: " . $e->getMessage());
         }
+
+        return $this->order;
+    }
+
+    private function parseShippingAddress(array $address): ShippingAddress
+    {
+        return new ShippingAddress([
+            'address1'      => $address['address1'],
+            'address2'      => $address['address2'] ?? '',
+            'address3'      => $address['address3'] ?? '',
+            'town'          => $address['town'] ?? '',
+            'city'          => $address['city'] ?? '',
+            'countryCode'   => $address['country_code'],
+            'zip'           => $address['zip'],
+        ]);
     }
 
     private function parseLineItems($items): LineItems

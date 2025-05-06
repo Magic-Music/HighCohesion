@@ -18,7 +18,7 @@
 - This class converts the Shipping Address and Line Items to entities/collections and builds an 
   OrderEntity class, instantiated as follows:
 ```
-$orderEntityClass = new OrderEntity($orderJsonData);
+$orderEntityClass = (new ParseOrderService)->parseJsonOrder($orderJsonData);
 ```
 
 

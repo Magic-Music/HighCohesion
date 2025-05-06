@@ -15,7 +15,7 @@ PHPUnit or a similar framework.
 $json = '{ valid JSON string }';
 
 // When: Parsed with ParseOrderService
-$order = new ParseOrderService($json);
+$order = (new ParseOrderService)->parseJsonOrder($json);
 
 // Then: The result is a populated OrderEntity
 assertTrue($order instanceof OrderEntity);
@@ -34,7 +34,7 @@ $json = '{ this is not valid JSON }';
 // When: Parsed
 // Then: It should throw an InvalidJsonException
 expectException(InvalidJsonException);
-$order = new ParseOrderService($json);
+$order = (new ParseOrderService)->parseJsonOrder($json);
 ```
 
 ### 3. Missing required fields should raise an exception
@@ -46,7 +46,7 @@ $json = '{ "order_number": "#1001", ... }';
 // When: Parsed
 // Then: A custom OrderValidationException is thrown
 expectException(InvalidJsonException);
-$order = new ParseOrderService($json);
+$order = (new ParseOrderService)->parseJsonOrder($json);
 ```
 
 ## Orders Collection Tests

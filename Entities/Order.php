@@ -10,6 +10,7 @@ use Entities\Collections\LineItems;
 class Order extends \App\Entities\Entity
 {
     public string $orderNumber;
+    public string $title;
     public string $currency = "GBP"; //Default values can be set on entity properties
     public ShippingAddress $shippingAddress; //Properties could also be other entities
     public int $total;
