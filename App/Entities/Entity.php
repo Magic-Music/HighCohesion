@@ -39,7 +39,8 @@ abstract class Entity
     }
 
     /**
-     * Get raw property values
+     * Get raw property values. Sub-entities
+     * and collections are not parsed
      */
     public function get(): array
     {
@@ -47,7 +48,7 @@ abstract class Entity
     }
 
     /**
-     * Convert keys to original format
+     * Return all data as an array
      */
     public function toArray(Entity|EntityCollection|null $input = null): array
     {
@@ -92,7 +93,7 @@ abstract class Entity
     }
 
     /**
-     * Set data on construct in array or json format
+     * Set data in array or json format
      * 'Collection' could be added to the allowed
      * types in a laravel implementation
      */

@@ -7,10 +7,12 @@ use Services\ParseOrderService;
 (new test)->run();
 
 /**
- * This is a very basic test class that demonstrates
+ * This is a very basic demo class that demonstrates
  * reading a json order, parsing it into an Order
  * entity and retrieving the data via the
- * various allowed methods
+ * various allowed methods.
+ *
+ * Run this with `php Tests/test.php`
  */
 class test
 {
