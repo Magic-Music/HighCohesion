@@ -17,6 +17,9 @@ class ParseOrderService
         $this->order = new Order;
     }
 
+    /**
+     * Convert JSON order data into an Order entity class
+     */
     public function parseJsonOrder(string $jsonOrderData): Order
     {
         $data = json_decode($jsonOrderData, JSON_OBJECT_AS_ARRAY);

@@ -32,10 +32,13 @@ abstract class Entity
         return false;
     }
 
+    /**
+     * Override this class - perform any desired validation checks
+     * on input values and throw an exception if invalid
+     */
     protected function validate($key, $value): void
     {
-        // Override this class - perform any desired validation checks
-        // on input values and throw an exception if invalid
+        //
     }
 
     /**

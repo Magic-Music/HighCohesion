@@ -10,7 +10,7 @@
   - Array
   - Individual properties
 - The base class end child extensions provide type hinting/safety on the individual properties and also 
-- allow for default values to be set
+  allow for default values to be set
 
 
 #### 2. Create a function to parse a json file into a PHP ORDER object.

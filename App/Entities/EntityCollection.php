@@ -17,6 +17,9 @@ abstract class EntityCollection implements Iterator, Countable
      */
     protected abstract function getCollectionEntityType(): string;
 
+    /**
+     * Add multiple entities during construction
+     */
     public function __construct(array $entities = [])
     {
         $this->collectionEntityType = $this->getCollectionEntityType();
@@ -26,6 +29,10 @@ abstract class EntityCollection implements Iterator, Countable
         }
     }
 
+    /**
+     * Add an entity to the collection
+     * Throw an exception if it's not the required type
+     */
     public function push(Entity $entity): void
     {
         if (!($entity instanceof $this->collectionEntityType)) {
