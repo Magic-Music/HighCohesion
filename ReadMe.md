@@ -5,7 +5,7 @@
 
 #### 1. Write a class/classes in PHP to represent the above ORDER.
 - Covered by `Entities/Order.php`
-- The base `Entities/Entity` class provides methods for getting and setting the data in a variety of ways
+- The base `App/Entities/Entity` class provides methods for getting and setting the data in a variety of ways
   - Json
   - Array
   - Individual properties
