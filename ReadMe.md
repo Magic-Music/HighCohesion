@@ -4,7 +4,7 @@
 ### The programming questions are covered by the following files:
 
 #### 1. Write a class/classes in PHP to represent the above ORDER.
-- Covered by `Entities/OrderEntity.php`
+- Covered by `Entities/Order.php`
 - The base `Entities/Entity` class provides methods for getting and setting the data in a variety of ways
   - Json
   - Array
